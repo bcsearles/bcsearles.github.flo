@@ -1,4 +1,12 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Your text with custom font</h1>
+</body>
+</html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
