@@ -301,8 +301,8 @@
     <div class="fidget-device">
         <div class="title" onclick="changeColor(this)">
             <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
-                <text x="160" y="22" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
-                <text x="160" y="36" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
+                <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
+                <text x="160" y="39" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
             </svg>
         </div>
         
@@ -339,7 +339,7 @@
             </div>
             
             <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="position: relative; margin-top: -25px;">
+                <div style="position: relative; margin-top: -28px;">
                     <div class="star-shadow"></div>
                     <div class="star" onclick="spinStar(this)"></div>
                 </div>
