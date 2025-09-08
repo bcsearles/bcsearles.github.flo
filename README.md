@@ -281,7 +281,7 @@
         <div class="fidget-device">
             <div class="title" onclick="changeColor(this)">
                 <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
-                    <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
+                    <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
                     <text x="160" y="39" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
                 </svg>
             </div>
@@ -290,7 +290,7 @@
                 <div class="ball-track" onclick="clickTrack(event)">
                     <div class="ball" id="ball"></div>
                 </div>
-                <div class="label">bimp me</div>
+                <div class="label">doink me</div>
             </div>
             
             <div class="module">
@@ -315,7 +315,7 @@
                     <div class="hand-container">
                         <div class="triangle" id="triangle"></div>
                     </div>
-                    <div class="label">doink me</div>
+                    <div class="label">bimp me</div>
                 </div>
                 
                 <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -469,11 +469,19 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
+            // Ensure we reset any existing transition first
+            triangle.style.transition = 'transform 0.1s ease-out';
             triangle.style.transform = `translate(${x - container.offsetWidth/2}px, ${y - container.offsetHeight/2}px) scale(1.5)`;
             
             setTimeout(() => {
+                triangle.style.transition = 'transform 0.3s ease-out';
                 triangle.style.transform = 'translate(-50%, -50%) scale(1)';
-            }, 300);
+                
+                // Reset to default transition after animation
+                setTimeout(() => {
+                    triangle.style.transition = 'all 0.4s';
+                }, 300);
+            }, 100);
         }
 
         // Triangle dragging functionality
@@ -494,6 +502,7 @@
             const mouseMoveHandler = (e) => {
                 if (!triangleDragging) return;
                 e.preventDefault(); // Prevent text selection during move
+                e.stopPropagation(); // Stop event bubbling
                 
                 const x = e.clientX - containerRect.left - container.offsetWidth/2;
                 const y = e.clientY - containerRect.top - container.offsetHeight/2;
@@ -501,7 +510,8 @@
                 this.style.transform = `translate(${x}px, ${y}px)`;
             };
             
-            const mouseUpHandler = () => {
+            const mouseUpHandler = (e) => {
+                e.stopPropagation(); // Stop event bubbling
                 triangleDragging = false;
                 this.style.cursor = 'grab';
                 
