@@ -13,7 +13,6 @@
             padding: 20px 20px 40px 20px;
         }
 
-        /* Loading Screen Styles */
         #loadingScreen {
             position: fixed;
             top: 0;
@@ -206,118 +205,22 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .fidget-device {
-                width: 100%;
-                padding: 15px;
-                box-shadow: 8px 8px 0px #333;
-            }
-            
-            .title {
-                padding: 12px 8px;
-                box-shadow: 4px 4px 0px #333;
-            }
-            
-            .title svg {
-                width: 280px;
-                height: 50px;
-            }
-            
-            .title text:first-child {
-                font-size: 22px !important;
-                letter-spacing: 2px !important;
-            }
-            
-            .title text:last-child {
-                font-size: 9px !important;
-                letter-spacing: 1px !important;
-            }
-            
-            .module {
-                padding: 12px;
-                margin: 8px 0;
-                box-shadow: 4px 4px 0px #333;
-            }
-            
-            .btn {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-                box-shadow: 2px 2px 0px #000;
-            }
-            
-            .btn:active {
-                box-shadow: 1px 1px 0px #000;
-                transform: translate(1px, 1px);
-            }
-            
-            .ball-track {
-                width: 280px;
-                height: 60px;
-                box-shadow: 3px 3px 0px #bbb;
-            }
-            
-            .ball {
-                width: 35px;
-                height: 35px;
-                top: 12px;
-                box-shadow: 3px 3px 0px #000;
-            }
-            
-            .wave-container {
-                width: 200px;
-                height: 80px;
-                box-shadow: 3px 3px 0px #333;
-            }
-            
-            .wave-canvas {
-                width: 200px;
-                height: 80px;
-            }
-            
-            /* Stack the boing/tumble sections vertically on mobile */
-            .module[style*="flex: 3"], .module[style*="flex: 1"] {
-                flex: 1 !important;
-                min-height: 80px;
-            }
-            
-            .triangle {
-                width: 25px;
-                height: 25px;
-                box-shadow: 2px 2px 0px #000;
-            }
-            
-            .star {
-                width: 60px;
-                height: 60px;
-                font-size: 36px;
-            }
-            
-            .star-shadow {
-                width: 60px;
-                height: 60px;
-                top: 4px;
-                left: 4px;
-            }
-            
-            #squareModule {
-                height: 120px !important;
-                padding: 10px !important;
-            }
-            
-            .square {
-                width: 45px;
-                height: 45px;
-                box-shadow: 3px 3px 0px #000;
-            }
-            
-            .label {
-                font-size: 12px;
-                margin-top: 15px;
-            }
+            body { padding: 10px; }
+            .fidget-device { width: 100%; padding: 15px; box-shadow: 8px 8px 0px #333; }
+            .title { padding: 12px 8px; box-shadow: 4px 4px 0px #333; }
+            .module { padding: 12px; margin: 8px 0; box-shadow: 4px 4px 0px #333; }
+            .btn { width: 40px; height: 40px; font-size: 18px; box-shadow: 2px 2px 0px #000; }
+            .btn:active { box-shadow: 1px 1px 0px #000; transform: translate(1px, 1px); }
+            .ball-track { width: 280px; height: 60px; box-shadow: 3px 3px 0px #bbb; }
+            .ball { width: 35px; height: 35px; top: 12px; box-shadow: 3px 3px 0px #000; }
+            .wave-container { width: 200px; height: 80px; box-shadow: 3px 3px 0px #333; }
+            .wave-canvas { width: 200px; height: 80px; }
+            .triangle { width: 25px; height: 25px; box-shadow: 2px 2px 0px #000; }
+            .star { width: 60px; height: 60px; font-size: 36px; }
+            .star-shadow { width: 60px; height: 60px; top: 4px; left: 4px; }
+            #squareModule { height: 120px !important; padding: 10px !important; }
+            .square { width: 45px; height: 45px; box-shadow: 3px 3px 0px #000; }
+            .label { font-size: 12px; margin-top: 15px; }
         }
     </style>
 </head>
@@ -325,19 +228,8 @@
     <!-- Loading Screen -->
     <div id="loadingScreen">
         <div style="text-align: center;">
-            <div style="
-                font-size: 18px;
-                font-weight: bold;
-                color: #333;
-                letter-spacing: 2px;
-                margin-bottom: 8px;
-            ">WELCOME TO</div>
-            <div style="
-                font-size: 32px;
-                font-weight: bold;
-                color: #333;
-                letter-spacing: 2px;
-            ">[ DIGITAL FIDGETAL ]</div>
+            <div style="font-size: 18px; font-weight: bold; color: #333; letter-spacing: 2px; margin-bottom: 8px;">WELCOME TO</div>
+            <div style="font-size: 32px; font-weight: bold; color: #333; letter-spacing: 2px;">[ DIGITAL FIDGETAL ]</div>
         </div>
     </div>
 
@@ -355,7 +247,7 @@
                 <div class="ball-track" onclick="clickTrack(event)">
                     <div class="ball" id="ball"></div>
                 </div>
-                <div class="label">chuck me</div>
+                <div class="label">bimp me</div>
             </div>
             
             <div class="module">
@@ -372,7 +264,7 @@
                         <button class="btn" onclick="adjustWaves(-1)">-</button>
                     </div>
                 </div>
-                <div class="label">tune me</div>
+                <div class="label">toon me</div>
             </div>
             
             <div style="display: flex; gap: 15px;">
@@ -380,15 +272,15 @@
                     <div class="hand-container">
                         <div class="triangle" id="triangle"></div>
                     </div>
-                    <div class="label">boing me</div>
+                    <div class="label">doink me</div>
                 </div>
                 
                 <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                    <div style="position: relative; margin-top: -28px;">
+                    <div style="position: relative; margin-top: -32px;">
                         <div class="star-shadow"></div>
                         <div class="star" onclick="spinStar(this)"></div>
                     </div>
-                    <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">tumble me</div>
+                    <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">nobble me</div>
                 </div>
             </div>
             
@@ -399,36 +291,32 @@
                     <button class="btn" onclick="toggleBounce()">○</button>
                 </div>
                 <div class="square" id="square0"></div>
-                <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">send me</div>
+                <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">wubba me</div>
             </div>
         </div>
     </div>
 
     <script>
-        let ballPos = 188, ballVel = 0, ballInterval = null, dragging = false;
-        let waveFreq = 5, waveSpeed = 2, waveColor = '#00ff00';
+        // Simple global variables
+        let ballPos = 188;
+        let ballVel = 0;
+        let ballInterval = null;
+        let dragging = false;
+        let waveFreq = 5;
+        let waveSpeed = 2;
+        let waveColor = '#00ff00';
         let squares = [{x: 200, y: 40, vx: 3, vy: 2}];
-        let nextId = 1, bouncing = false, starRotation = 0;
+        let nextId = 1;
+        let bouncing = false;
+        let starRotation = 0;
         let colors = ['#333', '#e74c3c', '#3498db', '#2ecc71', '#f39c12'];
         let colorIndex = 0;
 
+        // Ball physics
         function updateBallShadow() {
             const ball = document.getElementById('ball');
             const displacement = (ballPos - 175) / 100;
             ball.style.boxShadow = `${4 + displacement * 2}px ${4 + Math.abs(displacement) * 0.5}px 0px #000`;
-        }
-
-        function updateTriangleShadow(x, y, container) {
-            const triangle = document.getElementById('triangle');
-            const dispX = (x - container.offsetWidth / 2) / (container.offsetWidth / 2);
-            const dispY = (y - container.offsetHeight / 2) / (container.offsetHeight / 2);
-            triangle.style.boxShadow = `${3 + dispX * 8}px ${3 + dispY * 8}px 0px #000`;
-        }
-
-        function updateSquareShadow(el, x, y, maxW, maxH) {
-            const dispX = (x - maxW / 2) / (maxW / 2);
-            const dispY = (y - maxH / 2) / (maxH / 2);
-            el.style.boxShadow = `${4 + dispX * 2}px ${4 + dispY * 2}px 0px #000`;
         }
 
         document.getElementById('ball').addEventListener('mousedown', e => {
@@ -464,11 +352,6 @@
             }, 16);
         }
 
-        function changeColor(el) {
-            colorIndex = (colorIndex + 1) % colors.length;
-            el.style.color = colors[colorIndex];
-        }
-
         function clickTrack(e) {
             if (dragging) return;
             const rect = e.currentTarget.getBoundingClientRect();
@@ -481,6 +364,7 @@
             }
         }
 
+        // Wave animation (simplified)
         function drawWaves() {
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
@@ -511,6 +395,9 @@
         }
 
         function ripple(e) {
+            // Toggle wave pause state
+            wavePaused = !wavePaused;
+            
             const rect = e.currentTarget.getBoundingClientRect();
             const ripple = document.createElement('div');
             ripple.style.cssText = `
@@ -529,6 +416,7 @@
             setTimeout(() => ripple.remove(), 1000);
         }
 
+        // Bounce function
         function bounce(e) {
             const container = e.currentTarget;
             const triangle = document.getElementById('triangle');
@@ -537,14 +425,13 @@
             const y = e.clientY - rect.top;
             
             triangle.style.transform = `translate(${x - container.offsetWidth/2}px, ${y - container.offsetHeight/2}px) scale(1.5)`;
-            updateTriangleShadow(x, y, container);
             
             setTimeout(() => {
                 triangle.style.transform = 'translate(-50%, -50%) scale(1)';
-                triangle.style.boxShadow = '3px 3px 0px #000';
             }, 300);
         }
 
+        // Star spin
         function spinStar(el) {
             const spins = 3 + Math.random() * 2;
             starRotation += spins * 360;
@@ -560,14 +447,21 @@
             }
         }
 
+        // Title color change
+        function changeColor(el) {
+            colorIndex = (colorIndex + 1) % colors.length;
+            el.style.color = colors[colorIndex];
+        }
+
+        // Squares functionality
         function addSquare() {
             const container = document.getElementById('squareModule');
             const square = document.createElement('div');
             square.className = 'square';
             square.id = 'square' + nextId;
             
-            const maxW = container.offsetWidth - 70;
-            const maxH = container.offsetHeight - 60;
+            const maxW = container.offsetWidth - 43;
+            const maxH = 95;
             const x = Math.random() * maxW;
             const y = Math.random() * maxH;
             
@@ -577,7 +471,6 @@
             
             container.appendChild(square);
             squares.push({x, y, vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8});
-            updateSquareShadow(square, x, y, maxW, maxH);
             makeDraggable(square, squares.length - 1);
             nextId++;
         }
@@ -602,8 +495,8 @@
                 if (!el) return;
                 
                 const module = el.closest('.module');
-                const maxW = module.offsetWidth - 70;
-                const maxH = module.offsetHeight - 60;
+                const maxW = module.offsetWidth - 43;
+                const maxH = 95;
                 
                 sq.x += sq.vx;
                 sq.y += sq.vy;
@@ -616,7 +509,6 @@
                 
                 el.style.left = sq.x + 'px';
                 el.style.top = sq.y + 'px';
-                updateSquareShadow(el, sq.x, sq.y, maxW, maxH);
             });
             requestAnimationFrame(animate);
         }
@@ -632,8 +524,8 @@
                     if (!isDragging) return;
                     const container = document.getElementById('squareModule');
                     const rect = container.getBoundingClientRect();
-                    const maxW = container.offsetWidth - 70;
-                    const maxH = container.offsetHeight - 60;
+                    const maxW = container.offsetWidth - 43;
+                    const maxH = 110;
                     const x = Math.max(0, Math.min(maxW, e.clientX - rect.left - 20));
                     const y = Math.max(0, Math.min(maxH, e.clientY - rect.top - 20));
                     
@@ -641,7 +533,6 @@
                     el.style.top = y + 'px';
                     squares[index].x = x;
                     squares[index].y = y;
-                    updateSquareShadow(el, x, y, maxW, maxH);
                 };
                 
                 const upHandler = () => {
@@ -655,35 +546,28 @@
             });
         }
 
-        // Loading screen functionality
+        // Loading screen
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loadingScreen');
                 const mainContent = document.getElementById('mainContent');
                 
-                // Fade out loading screen
                 loadingScreen.style.transition = 'opacity 0.8s ease-out';
                 loadingScreen.style.opacity = '0';
                 
-                // Fade in main content
                 mainContent.style.opacity = '1';
                 mainContent.style.transform = 'scale(1)';
                 
-                // Remove loading screen after transition
                 setTimeout(() => {
                     loadingScreen.remove();
                 }, 800);
-            }, 2000); // Show loading for 2 seconds
+            }, 2000);
         });
 
         // Initialize everything
-        drawWaves();
+        drawWaves(); // Start simple wave animation
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
-        setTimeout(() => {
-            const container = document.getElementById('squareModule');
-            updateSquareShadow(document.getElementById('square0'), squares[0].x, squares[0].y, container.offsetWidth - 46, container.offsetHeight - 61);
-        }, 100);
     </script>
 </body>
 </html>
