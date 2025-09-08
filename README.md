@@ -147,6 +147,11 @@
             border-radius: 50%;
             transition: all 0.4s;
             box-shadow: 3px 3px 0px #000;
+            cursor: grab;
+        }
+
+        .triangle:active {
+            cursor: grabbing;
         }
 
         .star {
