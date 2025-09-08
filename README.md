@@ -354,7 +354,7 @@
                 <button class="btn" onclick="toggleBounce()">○</button>
             </div>
             <div class="square" id="square0"></div>
-            <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">wubba me</div>
+            <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">send me</div>
         </div>
     </div>
 
