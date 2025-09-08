@@ -23,8 +23,9 @@
             background: white;
             z-index: 10000;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding-top: 35vh;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
