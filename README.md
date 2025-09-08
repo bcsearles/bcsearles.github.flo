@@ -61,6 +61,10 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: 6px 6px 0px #333;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .module {
@@ -83,6 +87,10 @@
             margin: 5px;
             box-shadow: 3px 3px 0px #000;
             transition: all 0.1s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         .btn:hover { background: #f0f0f0; }
@@ -201,11 +209,42 @@
             font-size: 10px;
             color: #666;
             margin-top: 20px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         @keyframes ripple {
             0% { width: 4px; height: 4px; opacity: 1; }
             100% { width: 40px; height: 40px; opacity: 0; }
+        }
+
+        @keyframes ballBounce {
+            0% { 
+                transform: scale(0) rotate(0deg); 
+                opacity: 0; 
+            }
+            20% { 
+                transform: scale(1.3) rotate(90deg); 
+                opacity: 1; 
+            }
+            40% { 
+                transform: scale(1) rotate(180deg); 
+                opacity: 1; 
+            }
+            60% { 
+                transform: scale(1.1) rotate(270deg); 
+                opacity: 1; 
+            }
+            80% { 
+                transform: scale(1) rotate(360deg); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: scale(0) rotate(540deg); 
+                opacity: 0; 
+            }
         }
 
         @media (max-width: 480px) {
@@ -624,6 +663,33 @@
         drawWaves(); // Start simple wave animation
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
+        
+        // Simple container color change - works on any click
+        function changeContainerColor() {
+            containerColorIndex = (containerColorIndex + 1) % colors.length;
+            const container = document.querySelector('.fidget-device');
+            container.style.borderColor = colors[containerColorIndex];
+            container.style.boxShadow = `12px 12px 0px ${colors[containerColorIndex]}`;
+        }
+        
+        // Add click listener to the entire document to catch clicks on the container
+        document.addEventListener('click', function(e) {
+            const fidgetDevice = document.querySelector('.fidget-device');
+            const clickedInsideDevice = fidgetDevice.contains(e.target);
+            
+            // Check if click is on empty space or module backgrounds (not interactive elements)
+            if (clickedInsideDevice && 
+                !e.target.classList.contains('btn') && 
+                !e.target.classList.contains('ball') &&
+                !e.target.classList.contains('star') &&
+                !e.target.classList.contains('triangle') &&
+                !e.target.classList.contains('square') &&
+                !e.target.closest('.wave-container') &&
+                !e.target.closest('.title') &&
+                !e.target.closest('.ball-track')) {
+                changeContainerColor();
+            }
+        });
     </script>
 </body>
 </html>
