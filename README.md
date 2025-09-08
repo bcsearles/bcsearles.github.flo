@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Fidgetal</title>
+    <title>DIGITAL FIDGETAL</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -11,6 +11,27 @@
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             background: #f0f0f0;
             padding: 20px 20px 40px 20px;
+        }
+
+        /* Loading Screen Styles */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        #mainContent {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-in, transform 0.8s ease-in;
         }
 
         .fidget-device {
@@ -22,6 +43,8 @@
             margin: 0 auto;
             max-width: calc(100vw - 40px);
             box-shadow: 12px 12px 0px #333;
+            position: relative;
+            overflow: hidden;
         }
 
         .title {
@@ -298,63 +321,85 @@
     </style>
 </head>
 <body>
-    <div class="fidget-device">
-        <div class="title" onclick="changeColor(this)">
-            <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
-                <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
-                <text x="160" y="39" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
-            </svg>
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div style="text-align: center;">
+            <div style="
+                font-size: 18px;
+                font-weight: bold;
+                color: #333;
+                letter-spacing: 2px;
+                margin-bottom: 8px;
+            ">WELCOME TO</div>
+            <div style="
+                font-size: 32px;
+                font-weight: bold;
+                color: #333;
+                letter-spacing: 2px;
+            ">[ DIGITAL FIDGETAL ]</div>
         </div>
-        
-        <div class="module" style="margin-bottom: 22px;">
-            <div class="ball-track" onclick="clickTrack(event)">
-                <div class="ball" id="ball"></div>
-            </div>
-            <div class="label">chuck me</div>
-        </div>
-        
-        <div class="module">
-            <div style="display: flex; align-items: center; gap: 15px; justify-content: center;">
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <button class="btn" onclick="changeWaveMode(-1)">•</button>
-                    <button class="btn" onclick="changeWaveMode(1)">○</button>
-                </div>
-                <div class="wave-container" onclick="ripple(event)">
-                    <canvas class="wave-canvas" id="canvas" width="240" height="100"></canvas>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 5px;">
-                    <button class="btn" onclick="adjustWaves(1)">+</button>
-                    <button class="btn" onclick="adjustWaves(-1)">-</button>
-                </div>
-            </div>
-            <div class="label">tune me</div>
-        </div>
-        
-        <div style="display: flex; gap: 15px;">
-            <div class="module" style="flex: 3; cursor: pointer;" onclick="bounce(event)">
-                <div class="hand-container">
-                    <div class="triangle" id="triangle"></div>
-                </div>
-                <div class="label">boing me</div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="fidget-device">
+            <div class="title" onclick="changeColor(this)">
+                <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
+                    <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
+                    <text x="160" y="39" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
+                </svg>
             </div>
             
-            <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <div style="position: relative; margin-top: -28px;">
-                    <div class="star-shadow"></div>
-                    <div class="star" onclick="spinStar(this)"></div>
+            <div class="module" style="margin-bottom: 22px;">
+                <div class="ball-track" onclick="clickTrack(event)">
+                    <div class="ball" id="ball"></div>
                 </div>
-                <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">tumble me</div>
+                <div class="label">chuck me</div>
             </div>
-        </div>
-        
-        <div class="module" id="squareModule" style="position: relative; height: 150px; padding: 15px;">
-            <div style="position: absolute; left: 15px; top: 10px; display: flex; flex-direction: column;">
-                <button class="btn" onclick="addSquare()">+</button>
-                <button class="btn" onclick="removeSquare()">-</button>
-                <button class="btn" onclick="toggleBounce()">○</button>
+            
+            <div class="module">
+                <div style="display: flex; align-items: center; gap: 15px; justify-content: center;">
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <button class="btn" onclick="changeWaveMode(-1)">•</button>
+                        <button class="btn" onclick="changeWaveMode(1)">○</button>
+                    </div>
+                    <div class="wave-container" onclick="ripple(event)">
+                        <canvas class="wave-canvas" id="canvas" width="240" height="100"></canvas>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <button class="btn" onclick="adjustWaves(1)">+</button>
+                        <button class="btn" onclick="adjustWaves(-1)">-</button>
+                    </div>
+                </div>
+                <div class="label">tune me</div>
             </div>
-            <div class="square" id="square0"></div>
-            <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">send me</div>
+            
+            <div style="display: flex; gap: 15px;">
+                <div class="module" style="flex: 3; cursor: pointer;" onclick="bounce(event)">
+                    <div class="hand-container">
+                        <div class="triangle" id="triangle"></div>
+                    </div>
+                    <div class="label">boing me</div>
+                </div>
+                
+                <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div style="position: relative; margin-top: -28px;">
+                        <div class="star-shadow"></div>
+                        <div class="star" onclick="spinStar(this)"></div>
+                    </div>
+                    <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">tumble me</div>
+                </div>
+            </div>
+            
+            <div class="module" id="squareModule" style="position: relative; height: 150px; padding: 15px;">
+                <div style="position: absolute; left: 15px; top: 10px; display: flex; flex-direction: column;">
+                    <button class="btn" onclick="addSquare()">+</button>
+                    <button class="btn" onclick="removeSquare()">-</button>
+                    <button class="btn" onclick="toggleBounce()">○</button>
+                </div>
+                <div class="square" id="square0"></div>
+                <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">send me</div>
+            </div>
         </div>
     </div>
 
@@ -503,12 +548,10 @@
             const spins = 3 + Math.random() * 2;
             starRotation += spins * 360;
             
-            // Apply transition and rotation to the star
             el.style.transition = 'transform 2s ease-out';
             el.style.transform = `rotate(${starRotation}deg)`;
             el.style.background = colors[Math.floor(Math.random() * colors.length)];
             
-            // Apply same transition and rotation to the shadow
             const shadow = el.parentElement.querySelector('.star-shadow');
             if (shadow) {
                 shadow.style.transition = 'transform 2s ease-out';
@@ -611,13 +654,34 @@
             });
         }
 
-        // Initialize
+        // Loading screen functionality
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainContent = document.getElementById('mainContent');
+                
+                // Fade out loading screen
+                loadingScreen.style.transition = 'opacity 0.8s ease-out';
+                loadingScreen.style.opacity = '0';
+                
+                // Fade in main content
+                mainContent.style.opacity = '1';
+                mainContent.style.transform = 'scale(1)';
+                
+                // Remove loading screen after transition
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 800);
+            }, 2000); // Show loading for 2 seconds
+        });
+
+        // Initialize everything
         drawWaves();
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
         setTimeout(() => {
             const container = document.getElementById('squareModule');
-            updateSquareShadow(document.getElementById('square0'), squares[0].x, squares[0].y, container.offsetWidth - 70, container.offsetHeight - 60);
+            updateSquareShadow(document.getElementById('square0'), squares[0].x, squares[0].y, container.offsetWidth - 46, container.offsetHeight - 61);
         }, 100);
     </script>
 </body>
