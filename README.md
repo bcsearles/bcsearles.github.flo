@@ -282,7 +282,7 @@
                 <div class="module" style="flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                     <div style="position: relative; margin-top: -32px;">
                         <div class="star-shadow"></div>
-                        <div class="star" onclick="spinStar(this)"></div>
+                        <div class="star" onclick="spinStar(this)">★</div>
                     </div>
                     <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">nobble me</div>
                 </div>
@@ -422,6 +422,8 @@
 
         // Bounce function
         function bounce(e) {
+            if (triangleDragging) return; // Don't bounce if dragging
+            
             const container = e.currentTarget;
             const triangle = document.getElementById('triangle');
             const rect = container.getBoundingClientRect();
@@ -434,6 +436,56 @@
                 triangle.style.transform = 'translate(-50%, -50%) scale(1)';
             }, 300);
         }
+
+        // Triangle dragging functionality
+        document.getElementById('triangle').addEventListener('mousedown', function(e) {
+            e.stopPropagation(); // Prevent bounce function from triggering
+            e.preventDefault(); // Prevent text selection
+            triangleDragging = true;
+            this.style.cursor = 'grabbing';
+            this.style.transition = 'transform 0.1s ease-out'; // Add smooth transition while dragging
+            
+            // Disable text selection on the whole document while dragging
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none';
+            
+            const container = this.closest('.hand-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            const mouseMoveHandler = (e) => {
+                if (!triangleDragging) return;
+                e.preventDefault(); // Prevent text selection during move
+                
+                const x = e.clientX - containerRect.left - container.offsetWidth/2;
+                const y = e.clientY - containerRect.top - container.offsetHeight/2;
+                
+                this.style.transform = `translate(${x}px, ${y}px)`;
+            };
+            
+            const mouseUpHandler = () => {
+                triangleDragging = false;
+                this.style.cursor = 'grab';
+                
+                // Re-enable text selection
+                document.body.style.userSelect = '';
+                document.body.style.webkitUserSelect = '';
+                
+                // Snap back to center with animation
+                this.style.transition = 'transform 0.3s ease-out';
+                this.style.transform = 'translate(-50%, -50%)';
+                
+                // Remove transition after animation completes
+                setTimeout(() => {
+                    this.style.transition = 'all 0.4s';
+                }, 300);
+                
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            };
+            
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        });
 
         // Star spin
         function spinStar(el) {
@@ -500,7 +552,7 @@
                 
                 const module = el.closest('.module');
                 const maxW = module.offsetWidth - 43;
-                const maxH = 95;
+                const maxH = 105; // Tiny bit lower
                 
                 sq.x += sq.vx;
                 sq.y += sq.vy;
