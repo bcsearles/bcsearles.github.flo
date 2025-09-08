@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <h1>Your text with custom font</h1>
-</body>
-</html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +10,7 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: #f0f0f0;
-            padding: 40px 20px;
+            padding: 20px 20px 40px 20px;
         }
 
         .fidget-device {
