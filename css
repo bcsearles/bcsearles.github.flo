@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../fonts/CustomFont.woff2') format('woff2'),
+         url('../fonts/CustomFont.woff') format('woff'),
+         url('../fonts/CustomFont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Use the font */
+body {
+    font-family: 'CustomFont', Arial, sans-serif;
+}
