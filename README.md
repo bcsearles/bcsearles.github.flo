@@ -180,6 +180,32 @@
             0% { width: 4px; height: 4px; opacity: 1; }
             100% { width: 40px; height: 40px; opacity: 0; }
         }
+
+        @media (max-width: 480px) {
+            .fidget-device {
+                width: 100%;
+                padding: 15px;
+            }
+            
+            #squareModule {
+                height: 120px !important;
+                padding: 10px !important;
+            }
+            
+            .ball-track {
+                width: 280px;
+            }
+            
+            .wave-container {
+                width: 200px;
+                height: 80px;
+            }
+            
+            .wave-canvas {
+                width: 200px;
+                height: 80px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -232,7 +258,7 @@
             </div>
         </div>
         
-        <div class="module" id="squareModule" style="position: relative; height: 150px; padding: 15px;">
+        <div class="module" id="squareModule" style="position: relative; height: 120px; padding: 12px;">
             <div style="position: absolute; left: 15px; top: 10px; display: flex; flex-direction: column;">
                 <button class="btn" onclick="addSquare()">+</button>
                 <button class="btn" onclick="removeSquare()">-</button>
@@ -506,4 +532,4 @@
         }, 100);
     </script>
 </body>
-</html>
+</html
