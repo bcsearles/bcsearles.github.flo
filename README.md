@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -665,6 +665,8 @@
                 
                 setTimeout(() => {
                     loadingScreen.remove();
+                    // Start square bouncing animation after loading screen finishes
+                    animate();
                 }, 800);
             }, 2000);
         });
@@ -673,6 +675,10 @@
         drawWaves(); // Start simple wave animation
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
+        
+        // Ensure bouncing is enabled
+        bouncing = true;
+        animate(); // Start square bouncing animation immediately
         
         // Simple container color change - works on any click
         function changeContainerColor() {
