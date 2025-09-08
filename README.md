@@ -182,9 +182,101 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
             .fidget-device {
                 width: 100%;
                 padding: 15px;
+                box-shadow: 8px 8px 0px #333;
+            }
+            
+            .title {
+                padding: 12px 8px;
+                box-shadow: 4px 4px 0px #333;
+            }
+            
+            .title svg {
+                width: 280px;
+                height: 50px;
+            }
+            
+            .title text:first-child {
+                font-size: 22px !important;
+                letter-spacing: 2px !important;
+            }
+            
+            .title text:last-child {
+                font-size: 9px !important;
+                letter-spacing: 1px !important;
+            }
+            
+            .module {
+                padding: 12px;
+                margin: 8px 0;
+                box-shadow: 4px 4px 0px #333;
+            }
+            
+            .btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                box-shadow: 2px 2px 0px #000;
+            }
+            
+            .btn:active {
+                box-shadow: 1px 1px 0px #000;
+                transform: translate(1px, 1px);
+            }
+            
+            .ball-track {
+                width: 280px;
+                height: 60px;
+                box-shadow: 3px 3px 0px #bbb;
+            }
+            
+            .ball {
+                width: 35px;
+                height: 35px;
+                top: 12px;
+                box-shadow: 3px 3px 0px #000;
+            }
+            
+            .wave-container {
+                width: 200px;
+                height: 80px;
+                box-shadow: 3px 3px 0px #333;
+            }
+            
+            .wave-canvas {
+                width: 200px;
+                height: 80px;
+            }
+            
+            /* Stack the boing/tumble sections vertically on mobile */
+            .module[style*="flex: 3"], .module[style*="flex: 1"] {
+                flex: 1 !important;
+                min-height: 80px;
+            }
+            
+            .triangle {
+                width: 25px;
+                height: 25px;
+                box-shadow: 2px 2px 0px #000;
+            }
+            
+            .star {
+                width: 60px;
+                height: 60px;
+                font-size: 36px;
+            }
+            
+            .star-shadow {
+                width: 60px;
+                height: 60px;
+                top: 4px;
+                left: 4px;
             }
             
             #squareModule {
@@ -192,18 +284,15 @@
                 padding: 10px !important;
             }
             
-            .ball-track {
-                width: 280px;
+            .square {
+                width: 45px;
+                height: 45px;
+                box-shadow: 3px 3px 0px #000;
             }
             
-            .wave-container {
-                width: 200px;
-                height: 80px;
-            }
-            
-            .wave-canvas {
-                width: 200px;
-                height: 80px;
+            .label {
+                font-size: 12px;
+                margin-top: 15px;
             }
         }
     </style>
@@ -258,7 +347,7 @@
             </div>
         </div>
         
-        <div class="module" id="squareModule" style="position: relative; height: 120px; padding: 12px;">
+        <div class="module" id="squareModule" style="position: relative; height: 150px; padding: 15px;">
             <div style="position: absolute; left: 15px; top: 10px; display: flex; flex-direction: column;">
                 <button class="btn" onclick="addSquare()">+</button>
                 <button class="btn" onclick="removeSquare()">-</button>
@@ -532,4 +621,4 @@
         }, 100);
     </script>
 </body>
-</html
+</html>
