@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,6 +65,7 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            background: white !important;
         }
 
         .module {
@@ -74,6 +75,7 @@
             padding: 15px;
             text-align: center;
             box-shadow: 6px 6px 0px #333;
+            background: white !important;
         }
 
         .btn {
@@ -352,8 +354,10 @@
         let nextId = 1;
         let bouncing = false;
         let starRotation = 0;
-        let colors = ['#333', '#e74c3c', '#3498db', '#2ecc71', '#f39c12'];
+        let colors = ['white', '#333', '#e74c3c', '#3498db', '#2ecc71', '#f39c12'];
         let colorIndex = 0;
+        let triangleDragging = false;
+        let containerColorIndex = 0;
 
         // Ball physics
         function updateBallShadow() {
@@ -438,9 +442,6 @@
         }
 
         function ripple(e) {
-            // Toggle wave pause state
-            wavePaused = !wavePaused;
-            
             const rect = e.currentTarget.getBoundingClientRect();
             const rippleEl = document.createElement('div');
             rippleEl.style.cssText = `
@@ -651,6 +652,35 @@
             });
         }
 
+        // Simple container color change - works on any click
+        function changeContainerColor() {
+            containerColorIndex = (containerColorIndex + 1) % colors.length;
+            const container = document.querySelector('.fidget-device');
+            container.style.background = colors[containerColorIndex];
+        }
+        
+        // Add click listener to the entire document to catch clicks on the container
+        document.addEventListener('click', function(e) {
+            const fidgetDevice = document.querySelector('.fidget-device');
+            const clickedInsideDevice = fidgetDevice.contains(e.target);
+            
+            // Check if click is on empty space in main container (not in modules or interactive elements)
+            // Also prevent if ball is being dragged
+            if (clickedInsideDevice && 
+                !dragging &&
+                !e.target.classList.contains('btn') && 
+                !e.target.classList.contains('ball') &&
+                !e.target.classList.contains('star') &&
+                !e.target.classList.contains('triangle') &&
+                !e.target.classList.contains('square') &&
+                !e.target.closest('.wave-container') &&
+                !e.target.closest('.title') &&
+                !e.target.closest('.ball-track') &&
+                !e.target.closest('.module')) {
+                changeContainerColor();
+            }
+        });
+
         // Loading screen
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
@@ -679,33 +709,6 @@
         // Ensure bouncing is enabled
         bouncing = true;
         animate(); // Start square bouncing animation immediately
-        
-        // Simple container color change - works on any click
-        function changeContainerColor() {
-            containerColorIndex = (containerColorIndex + 1) % colors.length;
-            const container = document.querySelector('.fidget-device');
-            container.style.borderColor = colors[containerColorIndex];
-            container.style.boxShadow = `12px 12px 0px ${colors[containerColorIndex]}`;
-        }
-        
-        // Add click listener to the entire document to catch clicks on the container
-        document.addEventListener('click', function(e) {
-            const fidgetDevice = document.querySelector('.fidget-device');
-            const clickedInsideDevice = fidgetDevice.contains(e.target);
-            
-            // Check if click is on empty space or module backgrounds (not interactive elements)
-            if (clickedInsideDevice && 
-                !e.target.classList.contains('btn') && 
-                !e.target.classList.contains('ball') &&
-                !e.target.classList.contains('star') &&
-                !e.target.classList.contains('triangle') &&
-                !e.target.classList.contains('square') &&
-                !e.target.closest('.wave-container') &&
-                !e.target.closest('.title') &&
-                !e.target.closest('.ball-track')) {
-                changeContainerColor();
-            }
-        });
     </script>
 </body>
 </html>
