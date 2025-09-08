@@ -123,7 +123,6 @@
             border: 2px solid #000;
             border-radius: 8px;
             margin: 0 auto;
-            cursor: pointer;
             box-shadow: 4px 4px 0px #333;
         }
 
@@ -399,8 +398,8 @@
             wavePaused = !wavePaused;
             
             const rect = e.currentTarget.getBoundingClientRect();
-            const ripple = document.createElement('div');
-            ripple.style.cssText = `
+            const rippleEl = document.createElement('div');
+            rippleEl.style.cssText = `
                 position: absolute;
                 left: ${e.clientX - rect.left}px;
                 top: 50px;
@@ -412,8 +411,8 @@
                 animation: ripple 1s ease-out forwards;
                 pointer-events: none;
             `;
-            e.currentTarget.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 1000);
+            e.currentTarget.appendChild(rippleEl);
+            setTimeout(() => rippleEl.remove(), 1000);
         }
 
         // Bounce function
