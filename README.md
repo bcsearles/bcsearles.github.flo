@@ -461,7 +461,12 @@
             }
         });
 
-        document.addEventListener('mouseup', () => dragging = false);
+        document.addEventListener('mouseup', () => {
+            if (dragging) {
+                document.getElementById('ball').style.zIndex = ''; // Reset z-index when done dragging
+            }
+            dragging = false;
+        });
 
         function startBallPhysics() {
             if (ballInterval) clearInterval(ballInterval);
@@ -652,7 +657,7 @@
             square.id = 'square' + nextId;
             
             const maxW = container.offsetWidth - 43;
-            const maxH = window.innerWidth <= 480 ? 115 : 95;
+            const maxH = window.innerWidth <= 480 ? 155 : 95;
             const x = Math.random() * maxW;
             const y = Math.random() * maxH;
             
