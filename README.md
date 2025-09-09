@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -251,21 +251,102 @@
 
         @media (max-width: 480px) {
             body { padding: 10px; }
-            .fidget-device { width: 100%; padding: 15px; box-shadow: 8px 8px 0px #333; }
-            .title { padding: 12px 8px; box-shadow: 4px 4px 0px #333; }
-            .module { padding: 12px; margin: 8px 0; box-shadow: 4px 4px 0px #333; }
-            .btn { width: 40px; height: 40px; font-size: 18px; box-shadow: 2px 2px 0px #000; }
-            .btn:active { box-shadow: 1px 1px 0px #000; transform: translate(1px, 1px); }
-            .ball-track { width: 280px; height: 60px; box-shadow: 3px 3px 0px #bbb; }
-            .ball { width: 35px; height: 35px; top: 12px; box-shadow: 3px 3px 0px #000; }
-            .wave-container { width: 200px; height: 80px; box-shadow: 3px 3px 0px #333; }
-            .wave-canvas { width: 200px; height: 80px; }
-            .triangle { width: 25px; height: 25px; box-shadow: 2px 2px 0px #000; }
-            .star { width: 60px; height: 60px; font-size: 36px; }
-            .star-shadow { width: 60px; height: 60px; top: 4px; left: 4px; }
-            #squareModule { height: 120px !important; padding: 10px !important; }
-            .square { width: 45px; height: 45px; box-shadow: 3px 3px 0px #000; }
-            .label { font-size: 12px; margin-top: 15px; }
+            .fidget-device { 
+                width: 100%; 
+                padding: 15px; 
+                box-shadow: 8px 8px 0px #333;
+                max-width: none;
+            }
+            .title { 
+                padding: 12px 8px; 
+                box-shadow: 4px 4px 0px #333;
+                font-size: 24px;
+                width: 90%;
+            }
+            .module { 
+                padding: 12px; 
+                margin: 8px 0; 
+                box-shadow: 4px 4px 0px #333; 
+            }
+            .btn { 
+                width: 36px; 
+                height: 36px; 
+                font-size: 16px; 
+                box-shadow: 2px 2px 0px #000;
+                margin: 3px;
+            }
+            .btn:active { 
+                box-shadow: 1px 1px 0px #000; 
+                transform: translate(1px, 1px); 
+            }
+            .ball-track { 
+                width: calc(100vw - 80px);
+                max-width: 280px;
+                height: 50px; 
+                box-shadow: 3px 3px 0px #bbb; 
+            }
+            .ball { 
+                width: 30px; 
+                height: 30px; 
+                top: 10px; 
+                box-shadow: 3px 3px 0px #000; 
+            }
+            .wave-container { 
+                width: calc(100vw - 140px);
+                max-width: 200px;
+                height: 80px; 
+                box-shadow: 3px 3px 0px #333; 
+            }
+            .wave-canvas { 
+                width: 100%; 
+                height: 100%; 
+            }
+            .triangle { 
+                width: 22px; 
+                height: 22px; 
+                box-shadow: 2px 2px 0px #000; 
+            }
+            .hand-container {
+                height: 60px;
+            }
+            .star { 
+                width: 50px; 
+                height: 50px; 
+                font-size: 28px; 
+            }
+            .star-shadow { 
+                width: 50px; 
+                height: 50px; 
+                top: 3px; 
+                left: 3px; 
+            }
+            #squareModule { 
+                height: 130px !important; 
+                padding: 10px !important; 
+            }
+            .square { 
+                width: 35px; 
+                height: 35px; 
+                box-shadow: 3px 3px 0px #000; 
+            }
+            .label { 
+                font-size: 11px; 
+                margin-top: 12px; 
+            }
+            
+            /* iPhone specific adjustments */
+            .title svg {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .title svg text:first-child {
+                font-size: 22px;
+            }
+            
+            .title svg text:last-child {
+                font-size: 8px;
+            }
         }
     </style>
 </head>
