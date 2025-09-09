@@ -66,6 +66,7 @@
             -moz-user-select: none;
             -ms-user-select: none;
             background: white !important;
+            touch-action: manipulation;
         }
 
         .module {
