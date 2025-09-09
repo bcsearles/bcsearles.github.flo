@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -513,7 +513,6 @@
             
             const mouseUpHandler = (e) => {
                 e.stopPropagation(); // Stop event bubbling
-                triangleDragging = false;
                 this.style.cursor = 'grab';
                 
                 // Re-enable text selection
@@ -528,6 +527,11 @@
                 setTimeout(() => {
                     this.style.transition = 'all 0.4s';
                 }, 300);
+                
+                // Delay setting triangleDragging to false to prevent click events from firing
+                setTimeout(() => {
+                    triangleDragging = false;
+                }, 50);
                 
                 document.removeEventListener('mousemove', mouseMoveHandler);
                 document.removeEventListener('mouseup', mouseUpHandler);
@@ -665,9 +669,10 @@
             const clickedInsideDevice = fidgetDevice.contains(e.target);
             
             // Check if click is on empty space in main container (not in modules or interactive elements)
-            // Also prevent if ball is being dragged
+            // Also prevent if ball is being dragged or triangle is being dragged
             if (clickedInsideDevice && 
                 !dragging &&
+                !triangleDragging &&
                 !e.target.classList.contains('btn') && 
                 !e.target.classList.contains('ball') &&
                 !e.target.classList.contains('star') &&
@@ -702,6 +707,7 @@
         });
 
         // Initialize everything
+        document.title = "DIGITAL FIDGETAL";
         drawWaves(); // Start simple wave animation
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
