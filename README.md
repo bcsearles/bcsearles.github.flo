@@ -652,7 +652,7 @@
             square.id = 'square' + nextId;
             
             const maxW = container.offsetWidth - 43;
-            const maxH = 95;
+            const maxH = window.innerWidth <= 480 ? 115 : 95;
             const x = Math.random() * maxW;
             const y = Math.random() * maxH;
             
