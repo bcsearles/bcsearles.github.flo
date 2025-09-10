@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DIGITAL FIDGETAL</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,6 +11,117 @@
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             background: #f0f0f0;
             padding: 20px 20px 40px 20px;
+            touch-action: manipulation;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-link {
+            color: #666;
+            font-size: 12px;
+            font-weight: normal;
+            cursor: pointer;
+            text-decoration: underline;
+            margin: 0 15px;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            touch-action: manipulation;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border: 3px solid #333;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 12px 12px 0px #333;
+            position: relative;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .video-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border: 3px solid #333;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 12px 12px 0px #333;
+            position: relative;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .modal h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .modal ol {
+            padding-left: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .modal li {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .close {
+            color: #666;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            touch-action: manipulation;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
         }
 
         #loadingScreen {
@@ -94,6 +205,7 @@
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            touch-action: manipulation;
         }
 
         .btn:hover { background: #f0f0f0; }
@@ -112,6 +224,7 @@
             margin: 0 auto;
             cursor: pointer;
             box-shadow: 4px 4px 0px #bbb;
+            touch-action: manipulation;
         }
 
         .ball {
@@ -125,6 +238,7 @@
             left: 188px;
             cursor: grab;
             box-shadow: 4px 4px 0px #000;
+            touch-action: manipulation;
         }
 
         .wave-container {
@@ -135,6 +249,7 @@
             border-radius: 8px;
             margin: 0 auto;
             box-shadow: 4px 4px 0px #333;
+            touch-action: manipulation;
         }
 
         .wave-canvas { width: 100%; height: 100%; border-radius: 8px; }
@@ -144,6 +259,7 @@
             height: 70px;
             position: relative;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .triangle {
@@ -159,6 +275,7 @@
             transition: all 0.4s;
             box-shadow: 3px 3px 0px #000;
             cursor: grab;
+            touch-action: manipulation;
         }
 
         .triangle:active {
@@ -181,6 +298,7 @@
             transition: transform 0.3s ease;
             position: relative;
             z-index: 2;
+            touch-action: manipulation;
         }
 
         .star-shadow {
@@ -206,6 +324,7 @@
             left: 200px;
             cursor: move;
             box-shadow: 4px 4px 0px #000;
+            touch-action: manipulation;
         }
 
         .label {
@@ -252,6 +371,47 @@
 
         @media (max-width: 480px) {
             body { padding: 10px; }
+            
+            .nav-links {
+                margin-bottom: 15px;
+                padding: 8px;
+            }
+            
+            .nav-link {
+                font-size: 12px;
+                margin: 0 10px;
+            }
+            
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+                width: 95%;
+                box-shadow: 8px 8px 0px #333;
+            }
+
+            .video-modal-content {
+                margin: 10% auto;
+                padding: 15px;
+                width: 95%;
+                box-shadow: 8px 8px 0px #333;
+            }
+
+            .modal h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .modal li {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .close {
+                font-size: 24px;
+                top: 10px;
+                right: 15px;
+            }
+            
             .fidget-device { 
                 width: 100%; 
                 padding: 15px; 
@@ -322,8 +482,8 @@
                 left: 3px; 
             }
             #squareModule { 
-                height: 130px !important; 
-                padding: 10px !important; 
+                height: 160px !important; 
+                padding: 12px !important; 
             }
             .square { 
                 width: 35px; 
@@ -335,7 +495,6 @@
                 margin-top: 12px; 
             }
             
-            /* iPhone specific adjustments */
             .title svg {
                 max-width: 100%;
                 height: auto;
@@ -352,6 +511,37 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Links - CLEARLY VISIBLE -->
+    <div class="nav-links">
+        <span class="nav-link" onclick="openModal()">INSTRUCTIONS</span>
+        <span class="nav-link" onclick="openVideoModal()">VIDEO</span>
+    </div>
+    
+    <!-- Instructions Modal -->
+    <div id="instructionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Watch This</h2>
+            <ol>
+                <li>Scroll so Digital Fidgetal fully fits comfortably inside your window. You may have to zoom out (command -).</li>
+                <li>Create a new standalone tab for Digital Fidgetal, then resize tab window so it's the width of the Fidgetal.</li>
+                <li>Move this standalone tab to the left side of your monitor, and your other windows to the right.</li>
+                <li>You're ready to begin. Happy fidgeting!</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="video-modal-content">
+            <span class="close" onclick="closeVideoModal()">&times;</span>
+            <h2>How to DidgFidge</h2>
+            <div class="video-container">
+                <iframe src="https://player.vimeo.com/video/1117285399?h=a2365272d9" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Loading Screen -->
     <div id="loadingScreen">
         <div style="text-align: center;">
@@ -361,7 +551,7 @@
     </div>
 
     <!-- Main Content -->
-    <div id="mainContent">
+    <div id="mainContent">        
         <div class="fidget-device">
             <div class="title" onclick="changeColor(this)">
                 <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
@@ -424,6 +614,35 @@
     </div>
 
     <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('instructionsModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('instructionsModal').style.display = 'none';
+        }
+
+        function openVideoModal() {
+            document.getElementById('videoModal').style.display = 'block';
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('instructionsModal');
+            const videoModal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+            if (event.target === videoModal) {
+                videoModal.style.display = 'none';
+            }
+        }
+
         // Simple global variables
         let ballPos = 188;
         let ballVel = 0;
@@ -451,6 +670,7 @@
         document.getElementById('ball').addEventListener('mousedown', e => {
             e.stopPropagation();
             dragging = true;
+            e.target.style.zIndex = '9999';
         });
 
         document.addEventListener('mousemove', e => {
@@ -464,7 +684,7 @@
 
         document.addEventListener('mouseup', () => {
             if (dragging) {
-                document.getElementById('ball').style.zIndex = ''; // Reset z-index when done dragging
+                document.getElementById('ball').style.zIndex = '';
             }
             dragging = false;
         });
@@ -498,7 +718,7 @@
             }
         }
 
-        // Wave animation (simplified)
+        // Wave animation
         function drawWaves() {
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
@@ -549,7 +769,7 @@
 
         // Bounce function
         function bounce(e) {
-            if (triangleDragging) return; // Don't bounce if dragging
+            if (triangleDragging) return;
             
             const container = e.currentTarget;
             const triangle = document.getElementById('triangle');
@@ -557,7 +777,6 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Ensure we reset any existing transition first
             triangle.style.transition = 'transform 0.1s ease-out';
             triangle.style.transform = `translate(${x - container.offsetWidth/2}px, ${y - container.offsetHeight/2}px) scale(1.5)`;
             
@@ -565,22 +784,20 @@
                 triangle.style.transition = 'transform 0.3s ease-out';
                 triangle.style.transform = 'translate(-50%, -50%) scale(1)';
                 
-                // Reset to default transition after animation
                 setTimeout(() => {
                     triangle.style.transition = 'all 0.4s';
                 }, 300);
             }, 100);
         }
 
-        // Triangle dragging functionality
+        // Triangle dragging
         document.getElementById('triangle').addEventListener('mousedown', function(e) {
-            e.stopPropagation(); // Prevent bounce function from triggering
-            e.preventDefault(); // Prevent text selection
+            e.stopPropagation();
+            e.preventDefault();
             triangleDragging = true;
             this.style.cursor = 'grabbing';
-            this.style.transition = 'transform 0.1s ease-out'; // Add smooth transition while dragging
+            this.style.transition = 'transform 0.1s ease-out';
             
-            // Disable text selection on the whole document while dragging
             document.body.style.userSelect = 'none';
             document.body.style.webkitUserSelect = 'none';
             
@@ -589,8 +806,8 @@
             
             const mouseMoveHandler = (e) => {
                 if (!triangleDragging) return;
-                e.preventDefault(); // Prevent text selection during move
-                e.stopPropagation(); // Stop event bubbling
+                e.preventDefault();
+                e.stopPropagation();
                 
                 const x = e.clientX - containerRect.left - container.offsetWidth/2;
                 const y = e.clientY - containerRect.top - container.offsetHeight/2;
@@ -599,23 +816,19 @@
             };
             
             const mouseUpHandler = (e) => {
-                e.stopPropagation(); // Stop event bubbling
+                e.stopPropagation();
                 this.style.cursor = 'grab';
                 
-                // Re-enable text selection
                 document.body.style.userSelect = '';
                 document.body.style.webkitUserSelect = '';
                 
-                // Snap back to center with animation
                 this.style.transition = 'transform 0.3s ease-out';
                 this.style.transform = 'translate(-50%, -50%)';
                 
-                // Remove transition after animation completes
                 setTimeout(() => {
                     this.style.transition = 'all 0.4s';
                 }, 300);
                 
-                // Delay setting triangleDragging to false to prevent click events from firing
                 setTimeout(() => {
                     triangleDragging = false;
                 }, 50);
@@ -693,7 +906,7 @@
                 
                 const module = el.closest('.module');
                 const maxW = module.offsetWidth - 43;
-                const maxH = 105; // Tiny bit lower
+                const maxH = window.innerWidth <= 480 ? 115 : 105;
                 
                 sq.x += sq.vx;
                 sq.y += sq.vy;
@@ -722,7 +935,7 @@
                     const container = document.getElementById('squareModule');
                     const rect = container.getBoundingClientRect();
                     const maxW = container.offsetWidth - 43;
-                    const maxH = 110;
+                    const maxH = window.innerWidth <= 480 ? 115 : 110;
                     const x = Math.max(0, Math.min(maxW, e.clientX - rect.left - 20));
                     const y = Math.max(0, Math.min(maxH, e.clientY - rect.top - 20));
                     
@@ -743,20 +956,17 @@
             });
         }
 
-        // Simple container color change - works on any click
+        // Container color change
         function changeContainerColor() {
             containerColorIndex = (containerColorIndex + 1) % colors.length;
             const container = document.querySelector('.fidget-device');
             container.style.background = colors[containerColorIndex];
         }
         
-        // Add click listener to the entire document to catch clicks on the container
         document.addEventListener('click', function(e) {
             const fidgetDevice = document.querySelector('.fidget-device');
             const clickedInsideDevice = fidgetDevice.contains(e.target);
             
-            // Check if click is on empty space in main container (not in modules or interactive elements)
-            // Also prevent if ball is being dragged or triangle is being dragged
             if (clickedInsideDevice && 
                 !dragging &&
                 !triangleDragging &&
@@ -787,7 +997,6 @@
                 
                 setTimeout(() => {
                     loadingScreen.remove();
-                    // Start square bouncing animation after loading screen finishes
                     animate();
                 }, 800);
             }, 2000);
@@ -795,13 +1004,12 @@
 
         // Initialize everything
         document.title = "DIGITAL FIDGETAL";
-        drawWaves(); // Start simple wave animation
+        drawWaves();
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
         
-        // Ensure bouncing is enabled
         bouncing = true;
-        animate(); // Start square bouncing animation immediately
+        animate();
     </script>
 </body>
 </html>
