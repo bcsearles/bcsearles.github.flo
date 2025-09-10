@@ -521,7 +521,7 @@
     <div id="instructionsModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Watch This</h2>
+            <h2>How To Fidge</h2>
             <ol>
                 <li>Scroll so Digital Fidgetal fully fits comfortably inside your window. You may have to zoom out (command -).</li>
                 <li>Create a new standalone tab for Digital Fidgetal, then resize tab window so it's the width of the Fidgetal.</li>
@@ -535,7 +535,7 @@
     <div id="videoModal" class="modal">
         <div class="video-modal-content">
             <span class="close" onclick="closeVideoModal()">&times;</span>
-            <h2>How to DidgFidge</h2>
+            <h2>Watch This</h2>
             <div class="video-container">
                 <iframe src="https://player.vimeo.com/video/1117285399?h=a2365272d9" allowfullscreen></iframe>
             </div>
