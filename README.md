@@ -701,7 +701,7 @@
                 e.preventDefault(); // Prevent page scrolling
                 e.stopPropagation(); // Stop event from bubbling up
                 const scrollAmount = e.deltaY * 0.5; // Adjust sensitivity
-                ballPos = Math.max(14, Math.min(322, ballPos + scrollAmount));
+                ballPos = Math.max(14, Math.min(308, ballPos + scrollAmount));
                 document.getElementById('ball').style.left = ballPos + 'px';
                 updateBallShadow();
             }
