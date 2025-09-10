@@ -276,6 +276,7 @@
             box-shadow: 3px 3px 0px #000;
             cursor: grab;
             touch-action: manipulation;
+            z-index: 100;
         }
 
         .triangle:active {
@@ -494,6 +495,14 @@
                 margin-top: 12px; 
             }
             
+            /* Nobble me mobile adjustments */
+            .star + .label {
+                bottom: 2px !important;
+                letter-spacing: -1px !important;
+                word-spacing: -3px !important;
+                font-size: 10px !important;
+            }
+            
             .title svg {
                 max-width: 100%;
                 height: auto;
@@ -663,7 +672,7 @@
         let triangleDragging = false;
         let containerColorIndex = 0;
 
-        // Ball physics
+        // Ball physics - NO SCROLL FUNCTIONALITY AT ALL
         function updateBallShadow() {
             const ball = document.getElementById('ball');
             const displacement = (ballPos - 175) / 100;
@@ -679,7 +688,8 @@
         document.addEventListener('mousemove', e => {
             if (dragging) {
                 const rect = document.querySelector('.ball-track').getBoundingClientRect();
-                ballPos = Math.max(14, Math.min(322, e.clientX - rect.left - 14));
+                const maxPos = window.innerWidth <= 480 ? Math.min(220, rect.width - 45) : 308;
+                ballPos = Math.max(14, Math.min(maxPos, e.clientX - rect.left - 14));
                 document.getElementById('ball').style.left = ballPos + 'px';
                 updateBallShadow();
             }
@@ -692,22 +702,6 @@
             dragging = false;
         });
 
-        // Mouse wheel scroll to move ball (anywhere in doink me box)
-        // Target the entire doink me module (first module with ball-track)
-        const doinkModule = document.querySelector('.ball-track').closest('.module');
-        
-        doinkModule.addEventListener('wheel', (e) => {
-            if (!dragging) {
-                e.preventDefault(); // Prevent page scrolling
-                e.stopPropagation(); // Stop event from bubbling up
-                const scrollAmount = e.deltaY * 0.5; // Adjust sensitivity
-                const maxPos = window.innerWidth <= 480 ? Math.min(250, document.querySelector('.ball-track').offsetWidth - 30) : 308;
-                ballPos = Math.max(14, Math.min(maxPos, ballPos + scrollAmount));
-                document.getElementById('ball').style.left = ballPos + 'px';
-                updateBallShadow();
-            }
-        });
-
         function startBallPhysics() {
             if (ballInterval) clearInterval(ballInterval);
             ballInterval = setInterval(() => {
@@ -717,8 +711,9 @@
                     return;
                 }
                 ballPos += ballVel;
-                ballPos = Math.max(14, Math.min(322, ballPos));
-                if (ballPos <= 14 || ballPos >= 322) ballVel *= -0.8;
+                const maxPos = window.innerWidth <= 480 ? Math.min(220, document.querySelector('.ball-track').offsetWidth - 45) : 308;
+                ballPos = Math.max(14, Math.min(maxPos, ballPos));
+                if (ballPos <= 14 || ballPos >= maxPos) ballVel *= -0.8;
                 ballVel *= 0.97;
                 document.getElementById('ball').style.left = ballPos + 'px';
                 updateBallShadow();
@@ -728,7 +723,8 @@
         function clickTrack(e) {
             if (dragging) return;
             const rect = e.currentTarget.getBoundingClientRect();
-            const clickPos = Math.max(14, Math.min(322, e.clientX - rect.left - 14));
+            const maxPos = window.innerWidth <= 480 ? Math.min(220, rect.width - 45) : 308;
+            const clickPos = Math.max(14, Math.min(maxPos, e.clientX - rect.left - 14));
             const distance = Math.abs(clickPos - ballPos);
             
             if (distance > 20) {
@@ -816,7 +812,7 @@
             triangleDragging = true;
             this.style.cursor = 'grabbing';
             this.style.transition = 'transform 0.1s ease-out';
-            this.style.zIndex = '9999'; // Bring to front while dragging
+            this.style.zIndex = '9999';
             
             document.body.style.userSelect = 'none';
             document.body.style.webkitUserSelect = 'none';
@@ -838,7 +834,7 @@
             const mouseUpHandler = (e) => {
                 e.stopPropagation();
                 this.style.cursor = 'grab';
-                this.style.zIndex = '100'; // Reset to default higher z-index
+                this.style.zIndex = '100';
                 
                 document.body.style.userSelect = '';
                 document.body.style.webkitUserSelect = '';
@@ -978,11 +974,33 @@
         }
 
         // Container color change
+        let scrollAccumulator = 0;
+        const scrollThreshold = 60; // Amount of scroll needed to change color (reduced for faster changes)
+        
         function changeContainerColor() {
             containerColorIndex = (containerColorIndex + 1) % colors.length;
             const container = document.querySelector('.fidget-device');
             container.style.background = colors[containerColorIndex];
         }
+
+        // Scroll to change container color (only on background, not modules)
+        document.querySelector('.fidget-device').addEventListener('wheel', (e) => {
+            // Check if scroll is happening over a module or its children
+            const isOverModule = e.target.closest('.module') !== null;
+            const isOverTitle = e.target.closest('.title') !== null;
+            
+            // Only change color if scrolling over background (not over modules or title)
+            if (!isOverModule && !isOverTitle) {
+                e.preventDefault(); // Prevent page scrolling
+                e.stopPropagation(); // Stop event from bubbling up
+                
+                scrollAccumulator += Math.abs(e.deltaY);
+                if (scrollAccumulator >= scrollThreshold) {
+                    changeContainerColor();
+                    scrollAccumulator = 0; // Reset accumulator
+                }
+            }
+        });
         
         document.addEventListener('click', function(e) {
             const fidgetDevice = document.querySelector('.fidget-device');
@@ -1029,8 +1047,8 @@
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
         
-        bouncing = true;
-        animate();
+        bouncing = false; // Start with squares still
+        // animate() is only called when user clicks toggle bounce button
     </script>
 </body>
 </html>
