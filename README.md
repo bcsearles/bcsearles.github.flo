@@ -524,11 +524,11 @@
             <ol>
                 <li>Get antsy in a virtual meeting.</li>
                 <li>Open Digital Fidgetal in its own standalone window.</li>
-                <li>Move this window to the left side of your screen</li>
+                <li>Move this window to the left side of your screen.</li>
                 <li>Move your virtual meeting window to the right side.</li>
                 <li>You're ready to begin. It's fidgie time!</li>
             </ol>
-            <p style="margin-top: 20px; font-style: italic; color: #666; font-size: 12px;">*For best results, use Digital Fidgetal on a desktop computer.*</p>
+            <p style="margin-top: 20px; font-style: italic; color: #666; font-size: 12px;">*For best results, use Digital Fidgetal on a desktop computer*</p>
         </div>
     </div>
     
@@ -701,7 +701,8 @@
                 e.preventDefault(); // Prevent page scrolling
                 e.stopPropagation(); // Stop event from bubbling up
                 const scrollAmount = e.deltaY * 0.5; // Adjust sensitivity
-                ballPos = Math.max(14, Math.min(308, ballPos + scrollAmount));
+                const maxPos = window.innerWidth <= 480 ? Math.min(250, document.querySelector('.ball-track').offsetWidth - 30) : 308;
+                ballPos = Math.max(14, Math.min(maxPos, ballPos + scrollAmount));
                 document.getElementById('ball').style.left = ballPos + 'px';
                 updateBallShadow();
             }
