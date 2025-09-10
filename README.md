@@ -30,7 +30,7 @@
         }
 
         .nav-link:hover {
-            color: #666;
+            color: #333;
         }
 
         .modal {
@@ -61,7 +61,7 @@
         .video-modal-content {
             background-color: white;
             margin: 5% auto;
-            padding: 20px;
+            padding: 40px 20px 20px 20px;
             border: 3px solid #333;
             border-radius: 20px;
             width: 90%;
@@ -111,7 +111,6 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            margin-top: 10px;
         }
 
         .video-container iframe {
@@ -374,7 +373,6 @@
             
             .nav-links {
                 margin-bottom: 15px;
-                padding: 8px;
             }
             
             .nav-link {
@@ -391,7 +389,7 @@
 
             .video-modal-content {
                 margin: 10% auto;
-                padding: 15px;
+                padding: 30px 15px 15px 15px;
                 width: 95%;
                 box-shadow: 8px 8px 0px #333;
             }
@@ -511,10 +509,10 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Links - CLEARLY VISIBLE -->
+    <!-- Navigation Links -->
     <div class="nav-links">
-        <span class="nav-link" onclick="openModal()">INSTRUCTIONS</span>
-        <span class="nav-link" onclick="openVideoModal()">VIDEO</span>
+        <span class="nav-link" onclick="openModal()">READ THIS</span>
+        <span class="nav-link" onclick="openVideoModal()">WATCH THIS</span>
     </div>
     
     <!-- Instructions Modal -->
@@ -523,19 +521,20 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>How To Fidge</h2>
             <ol>
-                <li>Scroll so Digital Fidgetal fully fits comfortably inside your window. You may have to zoom out (command -).</li>
-                <li>Create a new standalone tab for Digital Fidgetal, then resize tab window so it's the width of the Fidgetal.</li>
-                <li>Move this standalone tab to the left side of your monitor, and your other windows to the right.</li>
-                <li>You're ready to begin. Happy fidgeting!</li>
+                <li>Get antsy in a virtual meeting.</li>
+                <li>Open Digital Fidgetal in its own standalone window.</li>
+                <li>Move this window to the left side of your screen</li>
+                <li>Move your virtual meeting window to the right side.</li>
+                <li>You're ready to begin. It's fidgie time!</li>
             </ol>
+            <p style="margin-top: 20px; font-style: italic; color: #666; font-size: 12px;">*For best results, use Digital Fidgetal on a desktop computer.*</p>
         </div>
     </div>
     
-    <!-- Video Modal -->
+    <!-- Video Modal - NO TEXT HEADERS -->
     <div id="videoModal" class="modal">
         <div class="video-modal-content">
             <span class="close" onclick="closeVideoModal()">&times;</span>
-            <h2>Watch This</h2>
             <div class="video-container">
                 <iframe src="https://player.vimeo.com/video/1117285399?h=a2365272d9" allowfullscreen></iframe>
             </div>
@@ -643,7 +642,7 @@
             }
         }
 
-        // Simple global variables
+        // Global variables
         let ballPos = 188;
         let ballVel = 0;
         let ballInterval = null;
@@ -687,6 +686,27 @@
                 document.getElementById('ball').style.zIndex = '';
             }
             dragging = false;
+        });
+
+        // Mouse wheel scroll to move ball (only when hovering over ball track)
+        let isHoveringBallTrack = false;
+        
+        document.querySelector('.ball-track').addEventListener('mouseenter', () => {
+            isHoveringBallTrack = true;
+        });
+        
+        document.querySelector('.ball-track').addEventListener('mouseleave', () => {
+            isHoveringBallTrack = false;
+        });
+        
+        document.addEventListener('wheel', (e) => {
+            if (isHoveringBallTrack && !dragging) {
+                e.preventDefault(); // Only prevent scrolling when over ball track
+                const scrollAmount = e.deltaY * 0.5; // Adjust sensitivity
+                ballPos = Math.max(14, Math.min(322, ballPos + scrollAmount));
+                document.getElementById('ball').style.left = ballPos + 'px';
+                updateBallShadow();
+            }
         });
 
         function startBallPhysics() {
