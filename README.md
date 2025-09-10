@@ -688,20 +688,14 @@
             dragging = false;
         });
 
-        // Mouse wheel scroll to move ball (only when hovering over ball track)
-        let isHoveringBallTrack = false;
+        // Mouse wheel scroll to move ball (anywhere in doink me box)
+        // Target the entire doink me module (first module with ball-track)
+        const doinkModule = document.querySelector('.ball-track').closest('.module');
         
-        document.querySelector('.ball-track').addEventListener('mouseenter', () => {
-            isHoveringBallTrack = true;
-        });
-        
-        document.querySelector('.ball-track').addEventListener('mouseleave', () => {
-            isHoveringBallTrack = false;
-        });
-        
-        document.addEventListener('wheel', (e) => {
-            if (isHoveringBallTrack && !dragging) {
-                e.preventDefault(); // Only prevent scrolling when over ball track
+        doinkModule.addEventListener('wheel', (e) => {
+            if (!dragging) {
+                e.preventDefault(); // Prevent page scrolling
+                e.stopPropagation(); // Stop event from bubbling up
                 const scrollAmount = e.deltaY * 0.5; // Adjust sensitivity
                 ballPos = Math.max(14, Math.min(322, ballPos + scrollAmount));
                 document.getElementById('ball').style.left = ballPos + 'px';
@@ -817,6 +811,7 @@
             triangleDragging = true;
             this.style.cursor = 'grabbing';
             this.style.transition = 'transform 0.1s ease-out';
+            this.style.zIndex = '9999'; // Bring to front while dragging
             
             document.body.style.userSelect = 'none';
             document.body.style.webkitUserSelect = 'none';
@@ -838,6 +833,7 @@
             const mouseUpHandler = (e) => {
                 e.stopPropagation();
                 this.style.cursor = 'grab';
+                this.style.zIndex = '100'; // Reset to default higher z-index
                 
                 document.body.style.userSelect = '';
                 document.body.style.webkitUserSelect = '';
