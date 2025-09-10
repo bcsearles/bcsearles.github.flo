@@ -512,8 +512,8 @@
 <body>
     <!-- Navigation Links -->
     <div class="nav-links">
-        <span class="nav-link" onclick="openModal()">READ THIS</span>
         <span class="nav-link" onclick="openVideoModal()">WATCH THIS</span>
+        <span class="nav-link" onclick="openModal()">READ THIS</span>
     </div>
     
     <!-- Instructions Modal -->
