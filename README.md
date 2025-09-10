@@ -610,6 +610,9 @@
                 <div class="label" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); margin: 0;">wubba me</div>
             </div>
         </div>
+        
+        <!-- Credit -->
+        <div style="text-align: center; margin-top: 25px; font-size: 10px; color: #999; font-weight: normal;">MADE BY BEN</div>
     </div>
 
     <script>
