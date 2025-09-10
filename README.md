@@ -613,7 +613,7 @@
         </div>
         
         <!-- Credit -->
-        <div style="text-align: center; margin-top: 25px; font-size: 10px; color: #999; font-weight: normal;">MADE BY BEN</div>
+        <div style="text-align: center; margin-top: 25px; font-size: 10px; color: #999; font-weight: normal;">MADE BY BEN 2025</div>
     </div>
 
     <script>
