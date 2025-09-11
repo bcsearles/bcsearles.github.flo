@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DIGITAL FIDGETAL</title>
+    
+    <!-- Social Media Meta Tags -->
+    <meta property="og:title" content="DIGITAL FIDGETAL">
+    <meta property="og:description" content="The remedy for computertime restlessness - interactive digital fidget device">
+    <meta property="og:site_name" content="DIGITAL FIDGETAL">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DIGITAL FIDGETAL">
+    <meta name="twitter:description" content="The remedy for computertime restlessness - interactive digital fidget device">
+    <meta name="description" content="DIGITAL FIDGETAL - The remedy for computertime restlessness. Interactive digital fidget device with physics-based elements to help relieve stress and anxiety while using your computer.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -825,11 +835,17 @@
                 const waveColors = ['#ff0000', '#ff8800', '#ffff00', '#88ff00', '#00ff00', '#00ff88', '#00ffff', '#0088ff', '#0000ff', '#8800ff'];
                 waveColor = waveColors[waveFreq - 1] || '#00ff00';
                 
-                // Reset square colors
+                // Reset square colors - keep square0 green, others use color array
                 squares.forEach((sq, i) => {
                     const el = document.getElementById('square' + i);
                     if (el) {
-                        el.style.background = colors[i % colors.length];
+                        if (i === 0) {
+                            // Keep the original square green
+                            el.style.background = '#27ae60';
+                        } else {
+                            // Other squares use the colors array
+                            el.style.background = colors[i % colors.length];
+                        }
                     }
                 });
                 console.log('Glow mode deactivated!');
