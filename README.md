@@ -672,6 +672,53 @@
         let triangleDragging = false;
         let containerColorIndex = 0;
 
+        // Triple click barrel roll
+        let clickCount = 0;
+        let clickTimer = null;
+        let isBarrelRolling = false;
+
+        function doBarrelRoll() {
+            if (isBarrelRolling) return;
+            isBarrelRolling = true;
+            
+            const container = document.querySelector('.fidget-device');
+            container.style.transition = 'transform 0.6s ease-in-out';
+            container.style.transformStyle = 'preserve-3d';
+            container.style.transform = 'rotateY(180deg)';
+            
+            setTimeout(() => {
+                container.style.transform = 'rotateY(0deg)';
+                setTimeout(() => {
+                    container.style.transition = '';
+                    container.style.transformStyle = '';
+                    isBarrelRolling = false;
+                }, 100);
+            }, 600);
+        }
+
+        // Triple click detection (only on gray background, not Digital Fidgetal)
+        document.addEventListener('click', (e) => {
+            // Only count clicks on the gray background (not on the fidgetal or nav links)
+            const isOnFidgetal = e.target.closest('.fidget-device') !== null;
+            const isOnNavLinks = e.target.closest('.nav-links') !== null;
+            const isOnModal = e.target.closest('.modal') !== null;
+            
+            if (!isOnFidgetal && !isOnNavLinks && !isOnModal) {
+                clickCount++;
+                
+                if (clickTimer) clearTimeout(clickTimer);
+                
+                if (clickCount >= 2) {
+                    doBarrelRoll();
+                    clickCount = 0;
+                } else {
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                    }, 250); // Reset after 250ms - requires very fast clicking
+                }
+            }
+        });
+
         // Ball physics - NO SCROLL FUNCTIONALITY AT ALL
         function updateBallShadow() {
             const ball = document.getElementById('ball');
@@ -977,20 +1024,101 @@
         let scrollAccumulator = 0;
         const scrollThreshold = 60; // Amount of scroll needed to change color (reduced for faster changes)
         
+        // Wrap effect variables (for page background scrolling)
+        let wrapScrollAccumulator = 0;
+        const wrapScrollThreshold = 300; // Amount of scroll needed for wrap effect (reduced for easier activation)
+        let isWrapping = false;
+        
         function changeContainerColor() {
             containerColorIndex = (containerColorIndex + 1) % colors.length;
             const container = document.querySelector('.fidget-device');
             container.style.background = colors[containerColorIndex];
         }
 
-        // Scroll to change container color (only on background, not modules)
+        function wrapFidgetal(direction) {
+            if (isWrapping) return; // Prevent multiple wraps at once
+            isWrapping = true;
+            
+            const container = document.querySelector('.fidget-device');
+            const originalTransform = container.style.transform;
+            
+            if (direction > 0) {
+                // Scrolling down (positive deltaY) - send fidgetal up and around from bottom
+                container.style.transition = 'transform 0.6s ease-in';
+                container.style.transform = 'translateY(-100vh)';
+                
+                setTimeout(() => {
+                    // Position below screen
+                    container.style.transition = 'none';
+                    container.style.transform = 'translateY(100vh)';
+                    
+                    setTimeout(() => {
+                        // Animate back to normal position from bottom
+                        container.style.transition = 'transform 0.6s ease-out';
+                        container.style.transform = originalTransform || 'translateY(0)';
+                        
+                        setTimeout(() => {
+                            container.style.transition = '';
+                            isWrapping = false;
+                        }, 600);
+                    }, 50);
+                }, 600);
+            } else {
+                // Scrolling up (negative deltaY) - send fidgetal down and around from top
+                container.style.transition = 'transform 0.6s ease-in';
+                container.style.transform = 'translateY(100vh)';
+                
+                setTimeout(() => {
+                    // Position above screen
+                    container.style.transition = 'none';
+                    container.style.transform = 'translateY(-100vh)';
+                    
+                    setTimeout(() => {
+                        // Animate back to normal position from top
+                        container.style.transition = 'transform 0.6s ease-out';
+                        container.style.transform = originalTransform || 'translateY(0)';
+                        
+                        setTimeout(() => {
+                            container.style.transition = '';
+                            isWrapping = false;
+                        }, 600);
+                    }, 50);
+                }, 600);
+            }
+        }
+
+        // Page background wrap effect (when scrolling outside Digital Fidgetal)
+        document.addEventListener('wheel', (e) => {
+            const isOverFidgetal = e.target.closest('.fidget-device') !== null;
+            
+            // Only trigger wrap effect when scrolling on page background (not over fidgetal)
+            if (!isOverFidgetal && !isWrapping) {
+                const scrollAmount = Math.abs(e.deltaY);
+                
+                // Check for wrap effect (vigorous scrolling on background)
+                wrapScrollAccumulator += scrollAmount;
+                if (wrapScrollAccumulator >= wrapScrollThreshold) {
+                    e.preventDefault(); // Prevent page scrolling during wrap
+                    wrapFidgetal(e.deltaY); // Pass scroll direction
+                    wrapScrollAccumulator = 0;
+                    return;
+                }
+                
+                // Reset wrap accumulator if scrolling stops for a bit
+                setTimeout(() => {
+                    wrapScrollAccumulator = Math.max(0, wrapScrollAccumulator - 50);
+                }, 200);
+            }
+        });
+
+        // Scroll to change container color (only on Digital Fidgetal background, not modules)
         document.querySelector('.fidget-device').addEventListener('wheel', (e) => {
             // Check if scroll is happening over a module or its children
             const isOverModule = e.target.closest('.module') !== null;
             const isOverTitle = e.target.closest('.title') !== null;
             
             // Only change color if scrolling over background (not over modules or title)
-            if (!isOverModule && !isOverTitle) {
+            if (!isOverModule && !isOverTitle && !isWrapping) {
                 e.preventDefault(); // Prevent page scrolling
                 e.stopPropagation(); // Stop event from bubbling up
                 
