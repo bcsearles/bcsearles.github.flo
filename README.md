@@ -12,6 +12,114 @@
             background: #f0f0f0;
             padding: 20px 20px 40px 20px;
             touch-action: manipulation;
+            transition: background 0.3s ease;
+        }
+
+        /* Glow Mode Styles */
+        body.glow-mode {
+            background: #0a0a0a;
+        }
+
+        .glow-mode .fidget-device {
+            background: #1a1a1a !important;
+            border: 3px solid #00ff00;
+            box-shadow: 12px 12px 0px #003300, 0 0 20px #00ff0050;
+        }
+
+        .glow-mode .title {
+            background: #0d0d0d !important;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            box-shadow: 6px 6px 0px #003300, inset 0 0 10px #00ff0030;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .glow-mode .title svg text:first-child {
+            fill: #00ff00;
+            filter: drop-shadow(0 0 5px #00ff00);
+        }
+
+        .glow-mode .title svg text:last-child {
+            fill: #66ff66;
+            filter: drop-shadow(0 0 3px #66ff66);
+        }
+
+        .glow-mode .module {
+            background: #0d0d0d !important;
+            border: 2px solid #00ff00;
+            box-shadow: 6px 6px 0px #003300, 0 0 15px #00ff0030;
+        }
+
+        .glow-mode .btn {
+            background: #0d0d0d;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            box-shadow: 3px 3px 0px #003300, 0 0 8px #00ff0040;
+        }
+
+        .glow-mode .btn:hover {
+            background: #1a1a1a;
+            box-shadow: 3px 3px 0px #003300, 0 0 12px #00ff0060;
+        }
+
+        .glow-mode .btn:active {
+            box-shadow: 1px 1px 0px #003300, 0 0 12px #00ff0060;
+            transform: translate(2px, 2px);
+        }
+
+        .glow-mode .ball-track {
+            background: #0d0d0d;
+            border: 2px solid #00ff00;
+            box-shadow: 4px 4px 0px #003300, inset 0 0 10px #00ff0020;
+        }
+
+        .glow-mode .ball {
+            background: #ffff00;
+            border: 2px solid #ffff00;
+            box-shadow: 4px 4px 0px #666600, 0 0 15px #ffff00;
+        }
+
+        .glow-mode .wave-container {
+            background: #000;
+            border: 2px solid #00ff00;
+            box-shadow: 4px 4px 0px #003300, 0 0 15px #00ff0040;
+        }
+
+        .glow-mode .triangle {
+            background: #ff0066;
+            border: 2px solid #ff0066;
+            box-shadow: 3px 3px 0px #660022, 0 0 12px #ff0066;
+        }
+
+        .glow-mode .star {
+            background: #ff8800 !important;
+            border: 3px solid #ff8800;
+            color: #000;
+            box-shadow: 0 0 20px #ff8800;
+        }
+
+        .glow-mode .star-shadow {
+            background: #663300;
+            box-shadow: 0 0 10px #663300;
+        }
+
+        .glow-mode .square {
+            border: 3px solid #00ffff;
+            box-shadow: 4px 4px 0px #006666, 0 0 15px #00ffff;
+        }
+
+        .glow-mode .label {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .glow-mode .nav-link {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .glow-mode .nav-link:hover {
+            color: #66ff66;
         }
 
         .nav-links {
@@ -562,7 +670,7 @@
     <!-- Main Content -->
     <div id="mainContent">        
         <div class="fidget-device">
-            <div class="title" onclick="changeColor(this)">
+            <div class="title" onclick="handleTitleClick()">
                 <svg width="320" height="40" viewBox="0 0 320 40" style="margin: 0 auto; display: block;">
                     <text x="160" y="20" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="900" text-anchor="middle" fill="currentColor" letter-spacing="3px">DIGITAL FIDGETAL</text>
                     <text x="160" y="39" font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="normal" text-anchor="middle" fill="#666" letter-spacing="1.5px">the remedy for computertime restlessness</text>
@@ -672,6 +780,62 @@
         let triangleDragging = false;
         let containerColorIndex = 0;
 
+        // Glow mode variables
+        let titleClickCount = 0;
+        let titleClickTimer = null;
+        let isGlowMode = false;
+
+        // Handle title clicks for glow mode
+        function handleTitleClick() {
+            titleClickCount++;
+            console.log('Title clicked! Count:', titleClickCount);
+            
+            if (titleClickTimer) clearTimeout(titleClickTimer);
+            
+            if (titleClickCount >= 5) {
+                console.log('Activating glow mode!');
+                toggleGlowMode();
+                titleClickCount = 0;
+            } else {
+                titleClickTimer = setTimeout(() => {
+                    titleClickCount = 0;
+                }, 2000);
+            }
+        }
+
+        function toggleGlowMode() {
+            isGlowMode = !isGlowMode;
+            console.log('Glow mode:', isGlowMode);
+            
+            if (isGlowMode) {
+                document.body.classList.add('glow-mode');
+                waveColor = '#00ff00';
+                
+                // Update square colors for glow mode
+                const glowColors = ['#00ffff', '#ff0066', '#ffff00', '#00ff00', '#ff8800', '#ff00ff'];
+                squares.forEach((sq, i) => {
+                    const el = document.getElementById('square' + i);
+                    if (el) {
+                        el.style.background = glowColors[i % glowColors.length];
+                    }
+                });
+                console.log('Glow mode activated!');
+            } else {
+                document.body.classList.remove('glow-mode');
+                const waveColors = ['#ff0000', '#ff8800', '#ffff00', '#88ff00', '#00ff00', '#00ff88', '#00ffff', '#0088ff', '#0000ff', '#8800ff'];
+                waveColor = waveColors[waveFreq - 1] || '#00ff00';
+                
+                // Reset square colors
+                squares.forEach((sq, i) => {
+                    const el = document.getElementById('square' + i);
+                    if (el) {
+                        el.style.background = colors[i % colors.length];
+                    }
+                });
+                console.log('Glow mode deactivated!');
+            }
+        }
+
         // Triple click barrel roll
         let clickCount = 0;
         let clickTimer = null;
@@ -714,12 +878,12 @@
                 } else {
                     clickTimer = setTimeout(() => {
                         clickCount = 0;
-                    }, 250); // Reset after 250ms - requires very fast clicking
+                    }, 250);
                 }
             }
         });
 
-        // Ball physics - NO SCROLL FUNCTIONALITY AT ALL
+        // Ball physics
         function updateBallShadow() {
             const ball = document.getElementById('ball');
             const displacement = (ballPos - 175) / 100;
@@ -806,8 +970,16 @@
 
         function changeWaveMode(direction) {
             waveFreq = Math.max(1, Math.min(10, waveFreq + direction));
-            const waveColors = ['#ff0000', '#ff8800', '#ffff00', '#88ff00', '#00ff00', '#00ff88', '#00ffff', '#0088ff', '#0000ff', '#8800ff'];
-            waveColor = waveColors[waveFreq - 1] || '#00ff00';
+            
+            if (isGlowMode) {
+                // Neon glow colors for dark mode
+                const glowWaveColors = ['#ff0066', '#ff3300', '#ff6600', '#ffff00', '#00ff00', '#00ffff', '#0099ff', '#6600ff', '#ff00ff', '#ff0099'];
+                waveColor = glowWaveColors[waveFreq - 1] || '#00ff00';
+            } else {
+                // Normal colors for light mode
+                const waveColors = ['#ff0000', '#ff8800', '#ffff00', '#88ff00', '#00ff00', '#00ff88', '#00ffff', '#0088ff', '#0000ff', '#8800ff'];
+                waveColor = waveColors[waveFreq - 1] || '#00ff00';
+            }
         }
 
         function ripple(e) {
@@ -941,7 +1113,14 @@
             
             square.style.left = x + 'px';
             square.style.top = y + 'px';
-            square.style.background = colors[nextId % colors.length];
+            
+            // Use glow colors if in glow mode, otherwise use normal colors
+            if (isGlowMode) {
+                const glowColors = ['#00ffff', '#ff0066', '#ffff00', '#00ff00', '#ff8800', '#ff00ff'];
+                square.style.background = glowColors[nextId % glowColors.length];
+            } else {
+                square.style.background = colors[nextId % colors.length];
+            }
             
             container.appendChild(square);
             squares.push({x, y, vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8});
@@ -1022,38 +1201,36 @@
 
         // Container color change
         let scrollAccumulator = 0;
-        const scrollThreshold = 60; // Amount of scroll needed to change color (reduced for faster changes)
+        const scrollThreshold = 60;
         
         // Wrap effect variables (for page background scrolling)
         let wrapScrollAccumulator = 0;
-        const wrapScrollThreshold = 300; // Amount of scroll needed for wrap effect (reduced for easier activation)
+        const wrapScrollThreshold = 300;
         let isWrapping = false;
         
         function changeContainerColor() {
+            if (isGlowMode) return; // Don't change color in glow mode
             containerColorIndex = (containerColorIndex + 1) % colors.length;
             const container = document.querySelector('.fidget-device');
             container.style.background = colors[containerColorIndex];
         }
 
         function wrapFidgetal(direction) {
-            if (isWrapping) return; // Prevent multiple wraps at once
+            if (isWrapping) return;
             isWrapping = true;
             
             const container = document.querySelector('.fidget-device');
             const originalTransform = container.style.transform;
             
             if (direction > 0) {
-                // Scrolling down (positive deltaY) - send fidgetal up and around from bottom
                 container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 container.style.transform = 'translateY(-100vh)';
                 
                 setTimeout(() => {
-                    // Position below screen
                     container.style.transition = 'none';
                     container.style.transform = 'translateY(100vh)';
                     
                     setTimeout(() => {
-                        // Animate back to normal position from bottom
                         container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                         container.style.transform = originalTransform || 'translateY(0)';
                         
@@ -1064,17 +1241,14 @@
                     }, 20);
                 }, 800);
             } else {
-                // Scrolling up (negative deltaY) - send fidgetal down and around from top
                 container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 container.style.transform = 'translateY(100vh)';
                 
                 setTimeout(() => {
-                    // Position above screen
                     container.style.transition = 'none';
                     container.style.transform = 'translateY(-100vh)';
                     
                     setTimeout(() => {
-                        // Animate back to normal position from top
                         container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                         container.style.transform = originalTransform || 'translateY(0)';
                         
@@ -1091,20 +1265,17 @@
         document.addEventListener('wheel', (e) => {
             const isOverFidgetal = e.target.closest('.fidget-device') !== null;
             
-            // Only trigger wrap effect when scrolling on page background (not over fidgetal)
             if (!isOverFidgetal && !isWrapping) {
                 const scrollAmount = Math.abs(e.deltaY);
                 
-                // Check for wrap effect (vigorous scrolling on background)
                 wrapScrollAccumulator += scrollAmount;
                 if (wrapScrollAccumulator >= wrapScrollThreshold) {
-                    e.preventDefault(); // Prevent page scrolling during wrap
-                    wrapFidgetal(e.deltaY); // Pass scroll direction
+                    e.preventDefault();
+                    wrapFidgetal(e.deltaY);
                     wrapScrollAccumulator = 0;
                     return;
                 }
                 
-                // Reset wrap accumulator if scrolling stops for a bit
                 setTimeout(() => {
                     wrapScrollAccumulator = Math.max(0, wrapScrollAccumulator - 50);
                 }, 200);
@@ -1113,19 +1284,17 @@
 
         // Scroll to change container color (only on Digital Fidgetal background, not modules)
         document.querySelector('.fidget-device').addEventListener('wheel', (e) => {
-            // Check if scroll is happening over a module or its children
             const isOverModule = e.target.closest('.module') !== null;
             const isOverTitle = e.target.closest('.title') !== null;
             
-            // Only change color if scrolling over background (not over modules or title)
             if (!isOverModule && !isOverTitle && !isWrapping) {
-                e.preventDefault(); // Prevent page scrolling
-                e.stopPropagation(); // Stop event from bubbling up
+                e.preventDefault();
+                e.stopPropagation();
                 
                 scrollAccumulator += Math.abs(e.deltaY);
                 if (scrollAccumulator >= scrollThreshold) {
                     changeContainerColor();
-                    scrollAccumulator = 0; // Reset accumulator
+                    scrollAccumulator = 0;
                 }
             }
         });
@@ -1164,7 +1333,6 @@
                 
                 setTimeout(() => {
                     loadingScreen.remove();
-                    animate();
                 }, 800);
             }, 2000);
         });
@@ -1175,8 +1343,7 @@
         makeDraggable(document.getElementById('square0'), 0);
         updateBallShadow();
         
-        bouncing = false; // Start with squares still
-        // animate() is only called when user clicks toggle bounce button
+        bouncing = false;
     </script>
 </body>
 </html>
