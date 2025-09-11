@@ -1044,7 +1044,7 @@
             
             if (direction > 0) {
                 // Scrolling down (positive deltaY) - send fidgetal up and around from bottom
-                container.style.transition = 'transform 0.6s ease-in';
+                container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 container.style.transform = 'translateY(-100vh)';
                 
                 setTimeout(() => {
@@ -1054,18 +1054,18 @@
                     
                     setTimeout(() => {
                         // Animate back to normal position from bottom
-                        container.style.transition = 'transform 0.6s ease-out';
+                        container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                         container.style.transform = originalTransform || 'translateY(0)';
                         
                         setTimeout(() => {
                             container.style.transition = '';
                             isWrapping = false;
-                        }, 600);
-                    }, 50);
-                }, 600);
+                        }, 800);
+                    }, 20);
+                }, 800);
             } else {
                 // Scrolling up (negative deltaY) - send fidgetal down and around from top
-                container.style.transition = 'transform 0.6s ease-in';
+                container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 container.style.transform = 'translateY(100vh)';
                 
                 setTimeout(() => {
@@ -1075,15 +1075,15 @@
                     
                     setTimeout(() => {
                         // Animate back to normal position from top
-                        container.style.transition = 'transform 0.6s ease-out';
+                        container.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                         container.style.transform = originalTransform || 'translateY(0)';
                         
                         setTimeout(() => {
                             container.style.transition = '';
                             isWrapping = false;
-                        }, 600);
-                    }, 50);
-                }, 600);
+                        }, 800);
+                    }, 20);
+                }, 800);
             }
         }
 
