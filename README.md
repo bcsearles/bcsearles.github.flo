@@ -497,7 +497,7 @@
             
             /* Nobble me mobile adjustments */
             .star + .label {
-                bottom: 2px !important;
+                bottom: -2px !important;
                 letter-spacing: -1px !important;
                 word-spacing: -3px !important;
                 font-size: 10px !important;
@@ -531,10 +531,10 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>How To Fidge</h2>
             <ol>
-                <li>Get antsy in a virtual meeting.</li>
+                <li>Get antsy at your computer.</li>
                 <li>Open Digital Fidgetal in its own standalone window.</li>
                 <li>Move this window to the left side of your screen.</li>
-                <li>Move your virtual meeting window to the right side.</li>
+                <li>Move other windows to the right side.</li>
                 <li>You're ready to begin. It's fidgie time!</li>
             </ol>
             <p style="margin-top: 20px; font-style: italic; color: #666; font-size: 12px;">*For best results, use Digital Fidgetal on a desktop computer*</p>
