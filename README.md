@@ -615,10 +615,11 @@
             
             /* Nobble me mobile adjustments */
             .star + .label {
-                bottom: -15px !important;
-                letter-spacing: -1px !important;
-                word-spacing: -3px !important;
+                bottom: 8px !important;
+                letter-spacing: -0.5px !important;
+                word-spacing: -2px !important;
                 font-size: 10px !important;
+                line-height: 1 !important;
             }
             
             .title svg {
