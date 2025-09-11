@@ -497,7 +497,7 @@
             
             /* Nobble me mobile adjustments */
             .star + .label {
-                bottom: -8px !important;
+                bottom: -15px !important;
                 letter-spacing: -1px !important;
                 word-spacing: -3px !important;
                 font-size: 10px !important;
