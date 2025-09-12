@@ -803,7 +803,7 @@
             
             if (titleClickTimer) clearTimeout(titleClickTimer);
             
-            if (titleClickCount >= 5) {
+            if (titleClickCount >= 3) {
                 console.log('Activating glow mode!');
                 toggleGlowMode();
                 titleClickCount = 0;
